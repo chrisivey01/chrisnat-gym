@@ -1,6 +1,54 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  letter-spacing: 1px;
+    color:white;
 }
+
+.header{
+    display:flex;
+    justify-content:center;
+}
+
+.headerItem{
+  padding:2px;
+  flex-grow:1;
+}
+
+.container{
+    display:block;
+}
+.selectContainer{
+    width:20vh;
+    margin:10px;
+}
+
+.inputs{
+  width:25vh;
+  padding:10px;
+}
+
+.inputContainer{
+  display:flex;
+}
+
+.submitButton{
+    height:10vh;
+    position:relative;
+    top:15vh;
+}
+
+.setCounts{
+    color:white;
+    font-weight:bolder;
+}
+
+#inputState{
+    display:inline-block;
+    width:20vw;
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -8,7 +56,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
