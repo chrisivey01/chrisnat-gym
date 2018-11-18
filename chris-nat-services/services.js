@@ -63,6 +63,12 @@ app.post('/sendData', function(req, res){
     let addWorkout;
     if(workoutType === "Squat") {
         sql = "INSERT INTO Squat SET weight_count = ?, rep_count = ?, lifter = ?, set_count = ?"
+    }else if(workoutType === "Bench") {
+        sql = "INSERT INTO Bench SET weight_count = ?, rep_count = ?, lifter = ?, set_count = ?"
+    }else if(workoutType === "Deadlift") {
+        sql = "INSERT INTO Deadlift SET weight_count = ?, rep_count = ?, lifter = ?, set_count = ?"
+    }else if(workoutType === "OHP") {
+        sql = "INSERT INTO overheadpress SET weight_count = ?, rep_count = ?, lifter = ?, set_count = ?"
     }
     for(let i =0; i<lifts.length; i++) {
         addWorkout = [
@@ -96,10 +102,58 @@ app.post('/squatData', function(req,res){
         .catch((err) => {
             return res.send({err})
         })
-
-
 })
 
+app.post('/benchData', function(req,res){
+
+    let liftername = req.body.lifterName
+    let sql = "SELECT * FROM bench WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+
+
+    pool.query(sql,liftername)
+        .then(function(result){
+            return res.send({
+                result
+            })
+        })
+        .catch((err) => {
+            return res.send({err})
+        })
+})
+
+app.post('/deadliftData', function(req,res){
+
+    let liftername = req.body.lifterName
+    let sql = "SELECT * FROM deadlift WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+
+
+    pool.query(sql,liftername)
+        .then(function(result){
+            return res.send({
+                result
+            })
+        })
+        .catch((err) => {
+            return res.send({err})
+        })
+})
+
+app.post('/overheadpressData', function(req,res){
+
+    let liftername = req.body.lifterName
+    let sql = "SELECT * FROM overheadpress WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+
+
+    pool.query(sql,liftername)
+        .then(function(result){
+            return res.send({
+                result
+            })
+        })
+        .catch((err) => {
+            return res.send({err})
+        })
+})
 
 
 //find specific lifter
@@ -113,21 +167,3 @@ app.post('/squatData', function(req,res){
     // await pool.query(insertSql, addAccount)
 
 
-
-
-// var connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'root',
-//     database: 'yaksbend'
-// })
-//
-//
-//
-//
-// app.get('/users', async function(req,res,next){
-//     await connection.query('SELECT * from users WHERE weekly_kill_total IS NOT NULL AND (on_yaks=1 OR on_yaks=2) ORDER BY wvwkills ASC', function(err, results) {
-//         if (err) throw err;
-//         res.send((results));
-//     })
-// });

@@ -42,5 +42,44 @@ export default {
             },
 
         })
-    }
+    },
+    getBench(lifterName){
+        let lifterObj= {};
+        lifterObj["lifterName"] = lifterName
+        return fetch(API + '/benchData', {
+            method:'post',
+            body: JSON.stringify(lifterObj),
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+        })
+    },
+    getDeadlift(lifterName){
+        let lifterObj= {};
+        lifterObj["lifterName"] = lifterName
+        return fetch(API + '/deadliftData', {
+            method:'post',
+            body: JSON.stringify(lifterObj),
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+        })
+    },
+    getOHP(lifterName){
+        let lifterObj= {};
+        lifterObj["lifterName"] = lifterName
+        return fetch(API + '/overheadpressData', {
+            method:'post',
+            body: JSON.stringify(lifterObj),
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+        })
+    },
 }

@@ -3,6 +3,10 @@ import WorkoutInputs from '../Components/Workout/WorkoutInputs'
 import WorkoutWeightsNReps from '../Components/Workout/WorkoutWeightsNReps'
 import WorkoutType from '../Components/Workout/WorkoutType'
 import Squat from "../Components/Squat/Squat";
+import Bench from "../Components/Bench/Bench";
+import Deadlift from "../Components/Deadlift/Deadlift";
+import OHP from "../Components/OHP/OHP";
+
 import { BrowserRouter as Router, Route, Switch, Link, withRouter } from "react-router-dom";
 
 
@@ -24,6 +28,7 @@ class Main extends Component{
             isLogged: false,
             popUpError: false,
             popUpSubmit: false,
+            submitSuccess: false,
             lifterName: '',
             lifterPassword:''
 
@@ -158,11 +163,67 @@ class Main extends Component{
 
                     })
                 })
+        }else if(picked === "Bench"){
+            let benchData = services.getBench(lifterName)
+
+            benchData
+                .then((response) => {
+                    return response.json()
+                })
+                .then((response) =>{
+                    for(let i = 0; i<response.result.length; i++ ){
+                        response.result[i].day = response.result[i].day.substring(0,10)
+                    }
+                    workoutObtained = response.result
+
+                    console.log(workoutObtained)
+                    this.setState({
+                        workoutData:workoutObtained,
+                        workoutType: picked
+
+                    })
+                })
+        }else if(picked === "Deadlift") {
+            let deadliftData = services.getDeadlift(lifterName)
+
+            deadliftData
+                .then((response) => {
+                    return response.json()
+                })
+                .then((response) => {
+                    for (let i = 0; i < response.result.length; i++) {
+                        response.result[i].day = response.result[i].day.substring(0, 10)
+                    }
+                    workoutObtained = response.result
+
+                    console.log(workoutObtained)
+                    this.setState({
+                        workoutData: workoutObtained,
+                        workoutType: picked
+
+                    })
+                })
+        }else if(picked === "OHP") {
+            let ohpData = services.getOHP(lifterName)
+
+            ohpData
+                .then((response) => {
+                    return response.json()
+                })
+                .then((response) => {
+                    for (let i = 0; i < response.result.length; i++) {
+                        response.result[i].day = response.result[i].day.substring(0, 10)
+                    }
+                    workoutObtained = response.result
+
+                    console.log(workoutObtained)
+                    this.setState({
+                        workoutData: workoutObtained,
+                        workoutType: picked
+
+                    })
+                })
         }
-        //
-        // this.setState({
-        //     workoutType: picked
-        // })
     }
 
     submitWeights = () =>{
@@ -182,8 +243,9 @@ class Main extends Component{
             })
             .then((response)=>{
                 console.log(response)
-                console.log("Workout Type: " + this.state.workoutType + "Lifts: " + JSON.stringify(this.state.workout) +
-                    "Lifter name: " + this.state.lifterName + " " + this.state.lifterPassword + " " + this.state.isLogged)
+                this.setState({
+                    submitSuccess: true
+                })
             })
             .catch((err)=>{
                 console.log(err)
@@ -195,7 +257,7 @@ class Main extends Component{
 
     render(){
         //destructor
-        const {workout, isLogged, lifterName, lifterPassword, popUpError,workoutData} = this.state;
+        const {workout, isLogged, lifterName, lifterPassword, popUpError,workoutData,submitSuccess} = this.state;
         return(
             <Router>
             <div>
@@ -212,6 +274,8 @@ class Main extends Component{
                             <WorkoutType
                                 workoutTypeHandler={this.workoutTypeHandler}
                                 workoutData={workoutData}/>
+                            {submitSuccess === true ? <label>Workout Submitted!</label> : null}
+
                             {this.state.workoutType ?
                                 <WorkoutInputs
                                     setCount={this.state.setCount}
@@ -241,6 +305,10 @@ class Main extends Component{
                 <hr/>
                 <div className="body">
                     <Route path='/squat' render={(props) => (<Squat {...props} workoutData={workoutData}/>)}/>
+                    <Route path='/bench' render={(props) => (<Bench {...props} workoutData={workoutData}/>)}/>
+                    <Route path='/deadlift' render={(props) => (<Deadlift {...props} workoutData={workoutData}/>)}/>
+                    <Route path='/Ohp' render={(props) => (<OHP {...props} workoutData={workoutData}/>)}/>
+
 
                 </div>
             </div>
