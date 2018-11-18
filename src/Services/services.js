@@ -1,6 +1,6 @@
 import Main from '../Layout/Main'
-const API = 'http://localhost:3500'
-
+// const API = 'http://localhost:3500'
+const API = 'http://18.205.163.220'
 
 
 export default {
