@@ -295,10 +295,9 @@ class Main extends Component{
                                     )
                                 })
                                 }
-                                {this.state.setCount ? <button className="submitButton"
-                                                               onClick={this.submitWeights}> Submit </button> : null}
-
                             </div>
+                            {this.state.setCount ? <button className="submitButton"
+                                                           onClick={this.submitWeights}> Submit </button> : null}
                         </div>
                     }
                 </div>
