@@ -6,6 +6,9 @@
     color:white;
 }
 
+.linebreak{
+    min-width:100%;
+}
 .header{
     display:flex;
     justify-content:center;
@@ -36,7 +39,7 @@
 .submitButton{
     height:10vh;
     position:relative;
-    top:15vh;
+    left:50vh;
 }
 
 .setCounts{
