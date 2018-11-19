@@ -107,7 +107,7 @@ app.post('/squatData', function(req,res){
 app.post('/benchData', function(req,res){
 
     let liftername = req.body.lifterName
-    let sql = "SELECT * FROM bench WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+    let sql = "SELECT * FROM Bench WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
 
 
     pool.query(sql,liftername)
@@ -124,7 +124,7 @@ app.post('/benchData', function(req,res){
 app.post('/deadliftData', function(req,res){
 
     let liftername = req.body.lifterName
-    let sql = "SELECT * FROM deadlift WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+    let sql = "SELECT * FROM Deadlift WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
 
 
     pool.query(sql,liftername)
@@ -141,7 +141,7 @@ app.post('/deadliftData', function(req,res){
 app.post('/overheadpressData', function(req,res){
 
     let liftername = req.body.lifterName
-    let sql = "SELECT * FROM overheadpress WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
+    let sql = "SELECT * FROM OHP WHERE lifter= ? ORDER BY day DESC, set_count ASC LIMIT 0, 1000"
 
 
     pool.query(sql,liftername)
